@@ -1,31 +1,27 @@
 'use strict';
+const _ = require('lodash');
+
 /****************************** GETTING STARTED ******************************/
 
 const worker = (users) => {
   return _.filter(users, { active: true });
-}
-
-module.exports = worker;
+};
 
 /*********************************** SORT ME **********************************/
 
 /* MY SOLUTION */
 
 const worker = (itemsArr) => {
-  const smallToLarge =  _.sortBy(itemsArr, 'quantity');
+  const smallToLarge = _.sortBy(itemsArr, 'quantity');
 
   return smallToLarge.reverse();
 };
-
-module.exports = worker;
 
 /* OFFICIAL SOLUTION */
 
 const worker = (itemsArr) => {
   return _.sortBy(itemsArr, 'quantity').reverse();
 };
-
-module.exports = worker;
 
  /******************************* IN EVERY CASE *******************************/
 
@@ -40,8 +36,6 @@ const worker = (collection) => {
     }
   });
  };
-
-module.exports = worker;
 
 /******************************* EVERYONE IS MIN ******************************/
 
@@ -73,60 +67,56 @@ const worker = function(cityTemps) {
   return sortedGroups;
 };
 
-module.exports = worker;
-
 /********************************* CHAIN MAIL *********************************/
 
 /* MY SOLUTION */
 
-const worker = function(words) {
+const worker = (words) => {
   return _.chain(words)
-  .sortBy(word => {
+  .sortBy((word) => {
     return word;
   })
-  .map(word => {
+  .map((word) => {
     word = word.toUpperCase() + 'CHAINED';
+
     return word;
   });
 };
 
-module.exports = worker;
-
 /* OFFIICIAL SOLUTION */
 
-const worker = function(words) {
+const worker = (words) => {
   return _.chain(words)
-    .map(word => {
+    .map((word) => {
       return word + 'Chained';
     })
-    .map(word => {
+    .map((word) => {
       return word.toUpperCase();
     })
     .sortBy();
 };
 
-module.exports = worker;
-
 /***************************** COUNT THE COMMENTS *****************************/
 
 /* MY SOLUTION */
 
-const worker = comments => {
+const worker = (comments) => {
   const output = [];
   const userObj = _.groupBy(comments, 'username');
   let index;
   let i = 0;
+
   _.forOwn(userObj, (value, key) => {
     index = {
-      'username': key,
-      'comment_count': _.size(userObj[Object.keys(userObj)[i]])
+      username: key,
+      comment_count: _.size(userObj[Object.keys(userObj)[i]])
     };
     output.push(index);
     i++;
   });
 
   if (output.length > 2) {
-    let temp = output[0];
+    const temp = output[0];
     output[0] = output[2];
     output[2] = temp;
   }
@@ -134,22 +124,18 @@ const worker = comments => {
   return output;
 };
 
-module.exports = worker;
-
 /* OFFICIAL SOLUTION */
 
-const commentcount = function(comments) {
+const worker = (comments) => {
   return _.chain(comments)
   .groupBy('username')
-  .map(function(item, name) {
-    return {username: name, comment_count: _.size(item)};
+  .map((item, name) => {
+    return { username: name, comment_count: _.size(item) };
   })
-  .sortBy(function(counted) {
+  .sortBy((counted) => {
     return -counted['comment_count'];
   });
 };
-
-module.exports = commentcount;
 
 /**************************** GIVE ME AN OVERVIEW ****************************/
 
@@ -163,19 +149,17 @@ const worker = (orders) => {
   let articleNum;
 
   _.forEach(grouped, (ordersArr, articleNumStr) => {
-    totalOrders =  _.reduce(ordersArr, (sum, order) => {
+    totalOrders = _.reduce(ordersArr, (sum, order) => {
       return sum + order.quantity;
     }, 0);
 
     articleNum = parseInt(articleNumStr);
 
-    acc.push({article: articleNum, total_orders: totalOrders});
+    acc.push({ article: articleNum, total_orders: totalOrders });
   });
 
   return _.sortBy(acc, 'total_orders').reverse();
 };
-
-module.exports = worker;
 
 /*********************************** ANALYZE **********************************/
 
@@ -202,8 +186,6 @@ const worker = (freelancers) => {
     overperform: overperform
   };
 };
-
-module.exports = worker;
 
 /****************************** START TEMPLATING ******************************/
 
